@@ -329,3 +329,102 @@ def sales():
 Flask==2.0.1
 Flask-SQLAlchemy==2.5.1
 ```
+
+# Instrucciones para ejecutar la Aplicación de Ventas
+
+## Requisitos previos
+
+- Python 3.7 o superior instalado en tu sistema
+- pip (el gestor de paquetes de Python)
+- Git (opcional, pero útil para clonar el repositorio si lo tienes en un control de versiones)
+
+## Pasos para ejecutar la aplicación
+
+1. Preparar el entorno de desarrollo:
+
+   a. Abre una terminal o línea de comandos.
+   
+   b. Navega al directorio donde quieres crear el proyecto:
+      ```
+      cd ruta/a/tu/directorio
+      ```
+
+   c. Crea un nuevo directorio para el proyecto y navega a él:
+      ```
+      mkdir ventas_app
+      cd ventas_app
+      ```
+
+2. Configurar un entorno virtual:
+
+   a. Crea un nuevo entorno virtual:
+      ```
+      python -m venv venv
+      ```
+
+   b. Activa el entorno virtual:
+      - En Windows:
+        ```
+        venv\Scripts\activate
+        ```
+      - En macOS/Linux:
+        ```
+        source venv/bin/activate
+        ```
+
+3. Instalar las dependencias:
+
+   a. Crea un archivo `requirements.txt` con el siguiente contenido:
+      ```
+      Flask==2.0.1
+      Flask-SQLAlchemy==2.5.1
+      ```
+
+   b. Instala las dependencias:
+      ```
+      pip install -r requirements.txt
+      ```
+
+4. Crear la estructura del proyecto:
+
+   Crea los siguientes directorios y archivos según la estructura proporcionada anteriormente:
+   ```
+   ventas_app/
+   │
+   ├── app/
+   │   ├── __init__.py
+   │   ├── models.py
+   │   ├── routes.py
+   │   └── templates/
+   │       ├── base.html
+   │       ├── index.html
+   │       ├── add_product.html
+   │       └── sales.html
+   │
+   ├── config.py
+   ├── run.py
+   └── requirements.txt
+   ```
+
+5. Copiar el código:
+
+   Copia el código proporcionado anteriormente en cada uno de los archivos correspondientes.
+
+6. Ejecutar la aplicación:
+
+   a. En la terminal, asegúrate de que el entorno virtual está activado.
+   
+   b. Ejecuta el siguiente comando:
+      ```
+      python run.py
+      ```
+
+7. Acceder a la aplicación:
+
+   Abre un navegador web y visita `http://localhost:5000`
+
+## Notas adicionales
+
+- Si encuentras algún error relacionado con módulos no encontrados, asegúrate de que estás en el directorio correcto y que el entorno virtual está activado.
+- Para detener la aplicación, presiona Ctrl+C en la terminal donde se está ejecutando.
+- Cada vez que quieras ejecutar la aplicación, asegúrate de activar el entorno virtual primero.
