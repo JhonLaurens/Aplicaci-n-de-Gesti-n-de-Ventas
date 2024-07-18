@@ -1,0 +1,32 @@
+```html
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Productos Disponibles</h1>
+<table>
+	<thead>
+		<tr>
+			<th>Nombre</th>
+			<th>Precio</th>
+			<th>Stock</th>
+			<th>Acción</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for product in products %}
+		<tr>
+			<td>{{ product.name }}</td>
+			<td>${{ "%.2f"|format(product.price) }}</td>
+			<td>{{ product.stock }}</td>
+			<td>
+				<form action="{{ url_for('main.register_sale') }}" method="post">
+					<input type="hidden" name="product_id" value="{{ product.id }}">
+					<input type="number" name="quantity" min="1" max="{{ product.stock }}" required>
+					<button type="submit">Vender</button>
+				</form>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
