@@ -3,23 +3,23 @@
 {% block content %}
 <h1>Historial de Ventas</h1>
 <table>
-	<thead>
-		<tr>
-			<th>Producto</th>
-			<th>Cantidad</th>
-			<th>Precio Total</th>
-			<th>Fecha</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for sale in sales %}
-		<tr>
-			<td>{{ sale.product_name }}</td>
-			<td>{{ sale.quantity }}</td>
-			<td>${{ "%.2f"|format(sale.total_price) }}</td>
-			<td>{{ sale.date }}</td>
-		</tr>
-		{% endfor %}
-	</tbody>
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sale in sales %}
+        <tr>
+            <td data-label="Fecha">{{ sale.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+            <td data-label="Producto">{{ sale.product.name }}</td>
+            <td data-label="Cantidad">{{ sale.quantity }}</td>
+            <td data-label="Precio Total">${{ "%.2f"|format(sale.total_price) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 {% endblock %}

@@ -1,35 +1,181 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{% block title %}Aplicación de Ventas{% endblock %}</title>
-	<style>
-		/* Estilos básicos aquí */
-		body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; }
-		nav { margin-bottom: 20px; }
-		nav a { margin-right: 10px; }
-		.flash { padding: 10px; margin-bottom: 10px; border-radius: 5px; }
-		.success { background-color: #d4edda; color: #155724; }
-		.error { background-color: #f8d7da; color: #721c24; }
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Aplicación de Ventas{% endblock %}</title>
+    <style>
+        :root {
+            --amazon-orange: #FF9900;
+            --amazon-black: #000000;
+            --amazon-white: #FFFFFF;
+            --light-gray: #f3f3f3;
+            --dark-gray: #333333;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: var(--amazon-black);
+            padding: 10px 0;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--amazon-white);
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--amazon-orange);
+        }
+
+        h1 {
+            color: var(--amazon-black);
+            border-bottom: 2px solid var(--amazon-orange);
+            padding-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: var(--amazon-white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        th {
+            background-color: var(--amazon-orange);
+            color: var(--amazon-white);
+        }
+
+        form {
+            background-color: var(--amazon-white);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid var(--light-gray);
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: var(--amazon-orange);
+            color: var(--amazon-white);
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e68a00;
+        }
+
+        .flash {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 3px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        @media (max-width: 768px) {
+            nav .container {
+                flex-direction: column;
+            }
+
+            nav a {
+                margin: 5px 0;
+            }
+
+            table, tr, td {
+                display: block;
+            }
+
+            th {
+                display: none;
+            }
+
+            td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+            }
+        }
+    </style>
 </head>
 <body>
-	<nav>
-		<a href="{{ url_for('main.index') }}">Inicio</a>
-		<a href="{{ url_for('main.add_product') }}">Agregar Producto</a>
-		<a href="{{ url_for('main.sales') }}">Ventas</a>
-	</nav>
+    <nav>
+        <div class="container">
+            <a href="{{ url_for('main.index') }}">Inicio</a>
+            <a href="{{ url_for('main.add_product') }}">Agregar Producto</a>
+            <a href="{{ url_for('main.sales') }}">Ventas</a>
+        </div>
+    </nav>
 
-	{% with messages = get_flashed_messages(with_categories=true) %}
-		{% if messages %}
-			{% for category, message in messages %}
-				<div class="flash {{ category }}">{{ message }}</div>
-			{% endfor %}
-		{% endif %}
-	{% endwith %}
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-	{% block content %}
-	{% endblock %}
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 </html>
