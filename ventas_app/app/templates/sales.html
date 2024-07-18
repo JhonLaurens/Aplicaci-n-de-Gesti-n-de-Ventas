@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Historial de Ventas</h1>
+<table>
+	<thead>
+		<tr>
+			<th>Producto</th>
+			<th>Cantidad</th>
+			<th>Precio Total</th>
+			<th>Fecha</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for sale in sales %}
+		<tr>
+			<td>{{ sale.product_name }}</td>
+			<td>{{ sale.quantity }}</td>
+			<td>${{ "%.2f"|format(sale.total_price) }}</td>
+			<td>{{ sale.date }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
