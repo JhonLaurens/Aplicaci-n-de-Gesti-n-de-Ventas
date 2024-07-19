@@ -1,3 +1,4 @@
+```html
 {% extends "base.html" %}
 
 {% block content %}
@@ -13,12 +14,14 @@
     </thead>
     <tbody>
         {% for sale in sales %}
-        <tr>
-            <td data-label="Fecha">{{ sale.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-            <td data-label="Producto">{{ sale.product.name }}</td>
-            <td data-label="Cantidad">{{ sale.quantity }}</td>
-            <td data-label="Precio Total">${{ "%.2f"|format(sale.total_price) }}</td>
-        </tr>
+            {% for item in sale.items %}
+            <tr>
+                <td data-label="Fecha">{{ sale.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td data-label="Producto">{{ item.product.name }}</td>
+                <td data-label="Cantidad">{{ item.quantity }}</td>
+                <td data-label="Precio Total">${{ "%.2f"|format(item.quantity * item.product.price) }}</td>
+            </tr>
+            {% endfor %}
         {% endfor %}
     </tbody>
 </table>

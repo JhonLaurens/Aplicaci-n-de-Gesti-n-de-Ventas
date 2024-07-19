@@ -1,3 +1,4 @@
+```html
 {% extends "base.html" %}
 
 {% block content %}
@@ -18,7 +19,7 @@
             <td data-label="Precio">${{ "%.2f"|format(product.price) }}</td>
             <td data-label="Stock">{{ product.stock }}</td>
             <td data-label="Acción">
-                <form action="{{ url_for('main.register_sale') }}" method="post">
+                <form action="{{ url_for('purchase.make_purchase') }}" method="post">
                     <input type="hidden" name="product_id" value="{{ product.id }}">
                     <input type="number" name="quantity" min="1" max="{{ product.stock }}" required>
                     <button type="submit">Vender</button>
