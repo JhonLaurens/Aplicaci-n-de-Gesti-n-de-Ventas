@@ -12,15 +12,18 @@ def index():
 @main.route('/add_product', methods=['GET', 'POST'])
 def add_product():
     if request.method == 'POST':
-        name = request.form['name']
-        price = float(request.form['price'])
-        stock = int(request.form['stock'])
-        
-        new_product = Product(name=name, price=price, stock=stock)
-        db.session.add(new_product)
-        db.session.commit()
-        
-        flash('Producto agregado exitosamente', 'success')
+        try:
+            name = request.form['name']
+            price = float(request.form['price'])
+            stock = int(request.form['stock'])
+            
+            new_product = Product(name=name, price=price, stock=stock)
+            db.session.add(new_product)
+            db.session.commit()
+            
+            flash('Producto agregado exitosamente', 'success')
+        except ValueError:
+            flash('Error en los datos ingresados', 'error')
         return redirect(url_for('main.index'))
     
     return render_template('add_product.html')
@@ -28,10 +31,13 @@ def add_product():
 @main.route('/increase_stock/<int:product_id>', methods=['POST'])
 def increase_stock(product_id):
     product = Product.query.get_or_404(product_id)
-    amount = int(request.form['amount'])
-    product.increase_stock(amount)
-    db.session.commit()
-    flash('Stock aumentado exitosamente', 'success')
+    try:
+        amount = int(request.form['amount'])
+        product.increase_stock(amount)
+        db.session.commit()
+        flash('Stock aumentado exitosamente', 'success')
+    except ValueError:
+        flash('Error en la cantidad ingresada', 'error')
     return redirect(url_for('main.index'))
 
 @main.route('/register', methods=['GET', 'POST'])
