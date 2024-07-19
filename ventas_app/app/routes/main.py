@@ -1,7 +1,6 @@
-# ventas_app/app/routes/main.py
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from ventas_app.app import db
-from ventas_app.app.models import Product
+from .. import db
+from ..models import Product
 
 main = Blueprint('main', __name__)
 
