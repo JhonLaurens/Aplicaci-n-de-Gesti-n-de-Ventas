@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Historial de Compras para {{ user.username }}</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Detalles</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for purchase in purchases %}
+        <tr>
+            <td>{{ purchase.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+            <td>${{ "%.2f"|format(purchase.total) }}</td>
+            <td>
+                <ul>
+                    {% for item in purchase.items %}
+                    <li>{{ item.product.name }} - Cantidad: {{ item.quantity }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
